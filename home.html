@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Breast Cancer Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* css for back to top button */
+  html {
+    scroll-behavior: smooth;
+  }
+  a , a:hover
+  {
+    text-decoration: none;
+  }
+  #button {
+    display: inline-block;
+    background-color: #01CBC6;
+    width: 52px;
+    height: 52px;
+    text-align: center;
+    border-radius: 25px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    transition: background-color .3s, 
+      opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+  }
+  #button::after {
+    content: "\f077";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 50px;
+    color: #fff;
+  }
+  #button:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+  }
+  #button:active {
+    background-color: lightgreen;
+  }
+  #button.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+.buttonx {
+  background-color:pink;
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  font-size: 9px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+  /* Styles for the content section */
+  
+  
+  @media (min-width: 500px) {
+    
+    #button {
+      margin: 30px;
+      font-size: medium;
+      
+    }
+  }
+  
+.buttonx:hover {opacity: 1;color: black;}
+
+</style>
+</head>
+<body>
+
+  </style>
+</head>
+<body>
+    <!-- Back to top button -->
+<a id="button"></a>
+<div class="container-fluid" style="background-color: #fff">
+  <div  width="20px" style="background-color:skyblue">
+    <h1 align="center" style="margin-top:3px; font-family: 'Verdana', cursive;">MedCare Disease Prediction Site</h1>      
+    <p align="center" style="font-family: 'Verdana', cursive;">  </p>
+</div>
+  <div class="container">
+    <div style="margin: 40px;padding: 20px;font-size: 1.3em;background-color: #67E6DC">
+
+      <ul class="nav nav-tabs" style="background-color: #67E6DC">
+        <li class="active"><a data-toggle="tab" href="#home" style="font-family: 'Verdana', cursive;">Breast Cancer Predictor</a></li>
+        <li><a data-toggle="tab" href="#menu1" style="font-family: 'Verdana', cursive;">Heart Disease Predictor</a></li>
+        <li><a data-toggle="tab" href="#menu2" style="font-family: 'Verdana', cursive;">Diabetes</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+          <p style="font-size: 1.2em; font-family: 'Verdana', cursive;">These inputs need to be provided for the classifier
+             to predict whether the tumor is benign or malignant</p> 
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <p style="font-size: 1.2em; font-family: 'Verdana', cursive;">Click to move to the Heart Disease page</p>
+            <button class="buttonx" onclick="window.location.href='Hearthealth.html'">
+              Heart Health</button>
+          </div>
+        <div id="menu2" class="tab-pane fade">
+          <p style="font-size: 1.2em; font-family: 'Verdana', cursive;">Click to move to the Diabetes Prediction page</p>
+          <button class="buttonx" onclick="window.location.href='DiabetesPrediction.html'">
+            Diabetes
+          </button>
+        
+        </div>
+      </div>
+    </div>
+
+
+    <div style="background-color:skyblue; padding: 20px; margin: 40px">
+
+      <form class="form-horizontal" action="/predict" method="post">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values1" style="font-family: 'Balsamiq Sans', cursive;">Radius Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values1" placeholder="Enter radius_mean" name="values1"  required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values2" style="font-family: 'Balsamiq Sans', cursive;">Texture Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values2" placeholder="Enter texture_mean" name="values2" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values3" style="font-family: 'Balsamiq Sans', cursive;">Perimeter Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values3" placeholder="Enter perimeter_mean" name="values3" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values4" style="font-family: 'Balsamiq Sans', cursive;">Area Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values4" placeholder="Enter area_mean" name="values4" required>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values5" style="font-family: 'Balsamiq Sans', cursive;">Smoothness Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values5" placeholder="Enter smoothness_mean" name="values5" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values6" style="font-family: 'Balsamiq Sans', cursive;">Compactness Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values6" placeholder="Enter compactness_mean" name="values6" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values7" style="font-family: 'Balsamiq Sans', cursive;">Concavity Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values7" placeholder="Enter concavity_mean" name="values7" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values8" style="font-family: 'Balsamiq Sans', cursive;">Concave Points Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values8" placeholder="Enter concave points_mean" name="values8" required>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values9" style="font-family: 'Balsamiq Sans', cursive;">Symmetry Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values9" placeholder="Enter symmetry_mean" name="values9" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values10" style="font-family: 'Balsamiq Sans', cursive;">Fractal Dimension Mean</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values10" placeholder="Enter fractal_dimension_mean" name="values10" required>
+          </div>
+        </div>
+
+        
+
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values11" style="font-family: 'Balsamiq Sans', cursive;">Radius SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values11" placeholder="Enter radius_se" name="values11" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values12" style="font-family: 'Balsamiq Sans', cursive;">Texture SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values12" placeholder="Enter texture_se" name="values12" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values13" style="font-family: 'Balsamiq Sans', cursive;">Perimeter SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values13" placeholder="Enter perimeter_se" name="values13" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values14" style="font-family: 'Balsamiq Sans', cursive;">Area SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values14" placeholder="Enter area_se" name="values14" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values15" style="font-family: 'Balsamiq Sans', cursive;">Smoothness SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values15" placeholder="Enter smoothness_se" name="values15" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values16" style="font-family: 'Balsamiq Sans', cursive;">Compactness SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values16" placeholder="Enter compactness_se" name="values16" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values17" style="font-family: 'Balsamiq Sans', cursive;">Concavity SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values17" placeholder="Enter concavity_se" name="values17" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values18" style="font-family: 'Balsamiq Sans', cursive;">Concave Points SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values18" placeholder="Enter concave points_se" name="values18" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values19" style="font-family: 'Balsamiq Sans', cursive;">Symmetry SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values19" placeholder="Enter symmetry_se" name="values19" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values20" style="font-family: 'Balsamiq Sans', cursive;">Fractal Dimension SE</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values20" placeholder="Enter fractal_dimension_se" name="values20" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values21" style="font-family: 'Balsamiq Sans', cursive;">Radius Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values21" placeholder="Enter radius_worst" name="values21" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values22" style="font-family: 'Balsamiq Sans', cursive;">Texture Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values22" placeholder="Enter texture_worst" name="values22" required>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values23" style="font-family: 'Verdana', cursive;">Perimeter Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values23" placeholder="Enter perimeter_worst" name="values23" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values24" style="font-family: 'Verdana', cursive;">Area Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values24" placeholder="Enter area_worst" name="values24" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values25" style="font-family: 'Verdana', cursive;">Smoothness Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values25" placeholder="Enter smoothness_worst" name="values25" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values26" style="font-family: 'Verdana', cursive;">Compactness Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values26" placeholder="Enter compactness_worst" name="values26" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values27" style="font-family: 'Verdana', cursive;">Concavity Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values27" placeholder="Enter concavity_worst" name="values27" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values28" style="font-family: 'Verdana', cursive;">Concave Points Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values28" placeholder="Enter concave points_worst" name="values28" required>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values29" style="font-family: 'Verdana', cursive;">Symmetry Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values29" placeholder="Enter symmetry_worst" name="values29" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="values30" style="font-family: 'Verdana', cursive;">Fractal Dimension Worst</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="values30" placeholder="Enter fractal_dimension_worst" name="values30" required>
+          </div>
+        </div>        
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <input class="btn btn-primary" type="submit" name="Submit Request">
+          </div>
+        </div>
+      </form>
+      
+    </div>
+
+  </div>  
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <script>
+      var btn = $('#button');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+
+
+    </script>
+</body>
+</html>
